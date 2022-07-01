@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import argparse
 
+import sys 
+sys.path.append('..')
+
 import broadlink
 from broadlink.const import DEFAULT_BCAST_ADDR, DEFAULT_TIMEOUT
 from broadlink.exceptions import StorageError
