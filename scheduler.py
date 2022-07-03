@@ -8,7 +8,6 @@ import broadlink
 from broadlink.const import DEFAULT_PORT
 from broadlink.exceptions import ReadError, StorageError
 
-
 def setup(device):
     fd = open(os.path.join(sys.path[0], "data", device), "r+t")
     values = fd.read().split()
@@ -37,7 +36,7 @@ def send (action1, action2, delay):
     for action in action1:
         send_single(action)
     # pause
-    print("pause " + delay.str() + "s")
+    print("pause " + str(delay) + "s")
     if (delay == 0):
         print("No delay")
         return
@@ -47,17 +46,20 @@ def send (action1, action2, delay):
         send_single(action)
 
 
+#sleep 30 seconds to wait for the board/network initialization end
+time.sleep(30)
+
 device = setup("rm4.device")
 
-print("Scheduler")
+print("Scheduler start")
 
 schedule.every().day.at("08:15").do(send, ["fenetre.up", "porte.up"], ["porte.stop"], 5)
 
-schedule.every().day.at("12:30").do(send_single, "porte.up")
-schedule.every().day.at("13:30").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
+schedule.every().day.at("12:00").do(send_single, "porte.up")
+schedule.every().day.at("13:00").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
 schedule.every().day.at("18:00").do(send_single, "fenetre.up")
 
-schedule.every().day.at("22:00").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 12)
+schedule.every().day.at("21:45").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 12)
 
 while True:
     schedule.run_pending()
