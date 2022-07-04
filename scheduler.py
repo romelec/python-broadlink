@@ -59,7 +59,7 @@ schedule.every().day.at("12:00").do(send_single, "porte.up")
 schedule.every().day.at("13:00").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
 schedule.every().day.at("18:00").do(send_single, "fenetre.up")
 
-schedule.every().day.at("21:45").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 12)
+schedule.every().day.at("21:45").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 15)
 
 while True:
     schedule.run_pending()
