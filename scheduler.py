@@ -56,10 +56,10 @@ print("Scheduler start")
 schedule.every().day.at("08:15").do(send, ["fenetre.up", "porte.up"], ["porte.stop"], 5)
 
 schedule.every().day.at("12:00").do(send_single, "porte.up")
-schedule.every().day.at("13:00").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
+schedule.every().day.at("12:40").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
 schedule.every().day.at("18:00").do(send_single, "fenetre.up")
 
-schedule.every().day.at("21:45").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 15)
+schedule.every().day.at("21:45").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 17)
 
 while True:
     schedule.run_pending()
