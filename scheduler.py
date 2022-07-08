@@ -35,6 +35,7 @@ def send (action1, action2, delay):
     # step 1
     for action in action1:
         send_single(action)
+        time.sleep(0.5)
     # pause
     print("pause " + str(delay) + "s")
     if (delay == 0):
@@ -44,6 +45,7 @@ def send (action1, action2, delay):
     # step 2
     for action in action2:
         send_single(action)
+        time.sleep(0.5)
 
 
 #sleep 30 seconds to wait for the board/network initialization end
@@ -53,10 +55,10 @@ device = setup("rm4.device")
 
 print("Scheduler start")
 
-schedule.every().day.at("08:15").do(send, ["fenetre.up", "porte.up"], ["porte.stop"], 5)
+schedule.every().day.at("08:10").do(send, ["fenetre.up", "porte.up"], ["porte.stop"], 5)
 
-schedule.every().day.at("12:00").do(send_single, "porte.up")
-schedule.every().day.at("12:40").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
+schedule.every().day.at("12:10").do(send_single, "porte.up")
+schedule.every().day.at("12:15").do(send, ["fenetre.down"], ["fenetre.stop"], 9)
 schedule.every().day.at("18:00").do(send_single, "fenetre.up")
 
 schedule.every().day.at("21:45").do(send, ["fenetre.down", "porte.down"], ["fenetre.stop", "porte.stop"], 17)
